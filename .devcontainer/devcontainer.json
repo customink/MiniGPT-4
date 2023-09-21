@@ -1,0 +1,13 @@
+{
+  "name": "Anaconda (Python 3)",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/conda:1": {},
+    "ghcr.io/devcontainers/features/git-lfs:1": {}
+  }
+  // "forwardPorts": [],
+  // "postCreateCommand": "python --version",
+}
