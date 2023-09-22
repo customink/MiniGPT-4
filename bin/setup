@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+conda env create --file environment.yml --yes
+
+if ! conda activate minigpt4; then
+  echo "\n"
+  echo "⚠️  Open a new shell window and run \"conda activate minigpt4\"."
+fi

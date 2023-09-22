@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+if [ -z "$HUGGING_FACE_TOKEN" ]; then
+  echo "⛔️ HUGGING_FACE_TOKEN environment variable not set."
+  echo "🎟️  Visit: https://huggingface.co/settings/tokens"
+  exit 1
+fi
+
+if [ -z "$HUGGING_FACE_USER" ]; then
+  echo "⛔️ HUGGING_FACE_USER environment variable not set."
+  echo "🎟️  Visit: https://huggingface.co/settings/profile"
+  exit 1
+fi
+
+git lfs install
+
+CLONE="https://${HUGGING_FACE_USER}:${HUGGING_FACE_TOKEN}@huggingface.co/meta-llama/Llama-2-7b-chat-hf"
+DEST="/workspaces/Llama-2-7b-chat-hf"
+
+if ! git clone $CLONE $DEST; then
+  echo "⛔️ You need access to Llama-2-7b-chat-hf."
+  echo "🎟️  Visit: https://huggingface.co/meta-llama/Llama-2-7b-chat-hf/tree/main"
+fi

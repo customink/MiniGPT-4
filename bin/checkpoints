@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+FILE_ID=11nAPjEok8eAGGEG1N2vXo3kBLCg0WgUk
+FILE_NAME=pretrained_minigpt4_llama2_7b.pth
+
+cd /tmp
+
+curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=${FILE_ID}" > /dev/null
+code="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"  
+
+curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${code}&id=${FILE_ID}" -o ${FILE_NAME}
+
+mv ${FILE_NAME} /workspaces/pretrained_minigpt4_llama2_7b.pth
