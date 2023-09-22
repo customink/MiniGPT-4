@@ -29,15 +29,46 @@ Step by step instructions to get up and running quickly.
 - Open New terminal. Run `conda activate minigpt4` command.
 - Run `bin/llama` command.
 - Run `bin/checkpoints` command.
+- ⚠️ Run `pip install --upgrade accelerate` command.
+- ⚠️ Run `pip install --upgrade bitsandbytes` command.
 - Run `bin/server` command.
-- 
-## Troubleshooting
+- Open `http://127.0.0.1:7860`
 
+## ⚠️ Troubleshooting
+
+Running `pip install --upgrade accelerate` seems to solve this issue.
+
+```
+ImportError: cannot import name 'is_npu_available' from 'accelerate.utils' (/opt/conda/envs/minigpt4/lib/python3.9/site-packages/accelerate/utils/__init__.py)
+```
+
+Running `pip install --upgrade bitsandbytes` seems to solve this issue. Details: https://github.com/Vision-CAIR/MiniGPT-4/issues/117
+
+```
+NameError: name 'cuda_setup' is not defined
+```
+
+This appears to be a warning only?
+
+```
+/opt/conda/envs/minigpt4/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libtorch_cuda_cu.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+```
+
+This command was needed at some point but not now?
+
+```
 pip install --upgrade accelerate
+```
+
+Not sure if we hit this error with Llama 2. Details: https://github.com/Vision-CAIR/MiniGPT-4/issues/74
+
+```
+RuntimeError: probability tensor contains either `inf`, `nan` or element < 0
+```
+
+Use this command to see GPU info.
+
+```
 nvidia-smi
-
-pip install -U bitsandbytes
-https://github.com/Vision-CAIR/MiniGPT-4/issues/117
-
-`RuntimeError: probability tensor contains either `inf`, `nan` or element < 0`
-https://github.com/Vision-CAIR/MiniGPT-4/issues/74
+```
